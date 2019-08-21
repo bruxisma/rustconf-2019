@@ -1,0 +1,15 @@
+languageCode = "en-us"
+title = "RustConf 2019"
+theme = 'reveal-hugo'
+
+[outputFormats.Reveal]
+baseName = "index"
+mediaType = "text/html"
+isHTML = true
+
+[params.reveal_hugo]
+highlight_theme = 'atom-one-dark'
+slide_number = true
+center = false
+theme = 'blood'
+
