@@ -37,9 +37,8 @@ outputs: "Reveal"
 
 ---
 
- * <span class="fab fa-twitter">&nbsp;@slurpsmadrips</span>
- * <span class="fab fa-github">&nbsp;slurps-mad-rips</span>
- * {{%fragment%}}Octane Main in Apex Legends{{%/fragment%}}
+ * <span class="fab fa-fw fa-twitter"></span>@slurpsmadrips
+ * <span class="fab fa-fw fa-github"></span>slurps-mad-rips
 
 {{%/section%}}
 
@@ -55,18 +54,13 @@ outputs: "Reveal"
 
 ## Further Resources
 
-Extra talks for some additional context and understanding this talk's themes
+<p class="left">Extra talks for some additional context and understanding this talk's themes</p>
 
- * {{%fragment%}}
-   Elsewhere Memory (C++20 Abstract Machine)  
-   &nbsp;&nbsp;&nbsp;&nbsp;&mdash; Niall Douglas, ACCU 2019
-   {{%/fragment%}}
- * {{%fragment%}}
-   Javascript Considered... Useful  
-   &nbsp;&nbsp;&nbsp;&nbsp;&mdash; Jenn Schiffer, JSConf EU 2019
-   {{%/fragment%}}
- * {{%fragment%}}
-   The Tragedy of Systemd  
+ * {{%fragment%}}Elsewhere Memory (C++20 Abstract Machine)  
+   &nbsp;&nbsp;&nbsp;&nbsp;&mdash; Niall Douglas, ACCU 2019{{%/fragment%}}
+ * {{%fragment%}}Javascript Considered... Useful  
+   &nbsp;&nbsp;&nbsp;&nbsp;&mdash; Jenn Schiffer, JSConf EU 2019{{%/fragment%}}
+ * {{%fragment%}}The Tragedy of Systemd  
    &nbsp;&nbsp;&nbsp;&nbsp;&mdash; Benno Rice, BSDCan 2018 | linux.conf.au 2019
    {{%/fragment%}}
 
@@ -110,6 +104,7 @@ Extra talks for some additional context and understanding this talk's themes
 |:-------------------------------:|:----------------------------:|
 |         `impl Not for T`        |        `operator not`        |
 |               move              |          relocation          |
+|          Working Group          |          Study Group         |
 
 ---
 
@@ -121,6 +116,7 @@ let x = Type::create("args")
   .yourent()
   .my()
   .real()
+  .space()
   .compiler()
 ```
 
@@ -130,4 +126,113 @@ let x = Type::create("args")
 
 ---
 
-## Differences and Compromises
+## Differences
+
+{{%section%}}
+
+ * {{%fragment%}}Let's not talk about defaults.{{%/fragment%}}
+ * {{%fragment%}}More of a dead meme than RIIR{{%/fragment%}}
+
+---
+
+Instead let's talk about
+
+ * {{%fragment%}}concepts vs traits{{%/fragment%}}
+ * {{%fragment%}}execution context boundary{{%/fragment%}}
+
+{{%/section%}}
+
+---
+
+## Traits vs. Concepts
+
+{{%section%}}
+
+{{%fragment%}}Rust Traits are *maximally* constraining.{{%/fragment%}}{{%fragment%}}If some `T` does not mention what traits it uses, it cannot be called on anything{{%/fragment%}}
+{{%fragment%}}C++ Concepts are *minimally* constraining{{%/fragment%}}{{%fragment%}}A given `T` must at least meet the requirements of a set of concepts.{{%/fragment%}}{{%fragment%}}Additionally special members are "best fit" as of Cologne 2019{{%/fragment%}}
+
+---
+
+```cpp
+template <std::destructible T>
+struct optional {
+  constexpr ~optional ()
+    requires std::trivially_destructible<T> = default 
+  ~optional()
+    requires negate<std::trivially_destructible<T>>
+    noexcept { this->reset(); }
+};
+```
+
+{{%/section%}}
+
+---
+
+## Execution Context Boundary
+
+{{%section%}}
+
+{{%fragment%}}AKA "Executing code at compile time vs runtime"{{%/fragment%}}  
+{{%fragment%}}const generics vs constexpr/consteval{{%/fragment%}}
+{{%fragment%}}C++ has a lot more work in this area{{%/fragment%}}
+
+---
+
+{{%fragment%}}C++20: `consteval`, `constinit`, and `constexpr`{{%/fragment%}}
+
+ * {{%fragment%}}We're not going to talk about `constinit`{{%/fragment%}}
+ * {{%fragment%}}`consteval`: Only at compile time{{%/fragment%}}
+ * {{%fragment%}}`contexpr`: Sometimes at compile time{{%/fragment%}}{{%fragment%}}(effectively, a bridge){{%/fragment%}}
+ * {{%fragment%}}functions are runtime by default{{%/fragment%}}
+
+---
+
+ * {{%fragment%}}We now support `virtual constexpr`{{%/fragment%}}{{%fragment%}}i.e., `virtual constexpr ~T ();`{{%/fragment%}}
+
+---
+
+ * {{%fragment%}}If we can do it, Rust can do it{{%/fragment%}}
+
+{{%/section%}}
+
+---
+
+## Standards vs Specifications
+
+{{%section%}}
+
+ * All standards are a specification
+ * Not all specifications are a standard, especially if they apply to a single
+   product.
+ * Thus, there could be a "standard" for Rust in the future which borrowck is
+   not a part of. Yes, this is terrifying, but let's put that aside for now.
+
+---
+
+ * C++ is limited to the rules of ISO, but we have a standard.
+ * Rust is limited to the the laws of the United States under which Mozilla operates.
+
+---
+
+ * ISO draws its authority from multiple nations, each backed by treaties,
+   international trademark laws, (in some cases, militaries) and by owning the
+   content found in its documents. (i.e., the "standard plate of spahgetti" is
+   owned by ISO)
+ * ECMA, an alternative organization to ISO, draws its authority from the same
+   sources. However corporations have as much of a say as a national body.
+ * Mozilla draws its authority from United States corporate laws. Such as
+   intellectual property laws that can be used to threaten permanent desitution
+   to anyone violating them if a court deems that someone has violated these
+   laws.
+
+---
+
+ * I'm not suggesting
+
+{{%/section%}}
+
+---
+
+## Who do you want?
+
+
